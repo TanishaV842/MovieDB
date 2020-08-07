@@ -11,7 +11,7 @@ export default function SearchMovies() {
    const SearchMovies = async (e) => {
       e.preventDefault();
 
-      const url = `https://api.themoviedb.org/3/movie/550?api_key=afcccaa660310f7acad8cb2c1efe22bc&language=en-US&query=${query}&page=1&include_adult=false`;
+      const url = `https://api.themoviedb.org/3/search/movie?api_key=afcccaa660310f7acad8cb2c1efe22bc&language=en-US&query=${query}&page=1&include_adult=false`;
 
       try {
          const res = await fetch(url);
@@ -20,23 +20,23 @@ export default function SearchMovies() {
       } catch (err) {
          console.error(err);
       }
-
    }
 
    return (
       <React.Fragment>
          <form className="form" onSubmit={SearchMovies}>
-            <label htmlFor="query" className="label">Movie Name</label>
+            <label htmlFor="query" className="label">Movie Title</label>
             <input className="input" type="text" name="query" placeholder="Enter Movie Title"
                value={query} onChange={(e) => setQuery(e.target.value)}
             />
             <button className="btn" type="submit">Search</button>
          </form>
+
          <div className="card-list" >
             {movies.filter(movie => movie.poster_path).map(movie => (
                <MovieCard movie={movie} key={movie.id} />
-
             ))}
          </div>
-      </React.Fragment>)
+      </React.Fragment>
+   )
 }
